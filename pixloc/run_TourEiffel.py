@@ -18,6 +18,16 @@ default_paths = Paths(
     hloc_logs='{suffix}/results.txt_logs.pkl'
 )
 
+default_paths_oracle = Paths(
+    query_images='{suffix}/images',
+    reference_images='{suffix}/images',
+    reference_sfm='{suffix}/sfm_superpoint+superglue/',
+    query_list='{suffix}/query_list_with_intrinsics.txt',
+    retrieval_pairs='{suffix}/pairs-query-covis10.txt',
+    ground_truth='{suffix}/',
+    results='pixloc_TourEiffel_{suffix}_covis_oracle{from_poses}.txt'
+)
+
 experiment = 'pixloc_megadepth'
 
 default_confs = {
@@ -60,10 +70,17 @@ def main():
     parser = create_argparser('TourEiffel')
     parser.add_argument('--suffix', required=True)
     parser.add_argument('--eval_only', action='store_true')
+    parser.add_argument('--oracle', action='store_true')
     args = parser.parse_args()
 
     set_logging_debug(args.verbose)
-    paths = parse_paths(args, default_paths)
+    if args.oracle:
+        if args.from_poses:
+            raise Exception('Cannot use Pose Localizer with oracle')
+        paths = parse_paths(args, default_paths_oracle)
+        default_confs['from_retrieval']['refinement']['do_pose_approximation'] = False
+    else:
+        paths = parse_paths(args, default_paths)
     paths.dataset /= '{suffix}'
     paths.dumps /= '{suffix}'
     conf = parse_conf(args, default_confs)
