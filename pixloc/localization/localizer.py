@@ -10,7 +10,7 @@ from .feature_extractor import FeatureExtractor
 from .refiners import PoseRefiner, RetrievalRefiner
 
 from ..utils.data import Paths
-from ..utils.io import parse_image_lists, parse_retrieval, load_hdf5
+from ..utils.io import parse_image_lists, parse_retrieval, load_hdf5, load_hloc_netvlad_hdf5
 from ..utils.quaternions import rotmat2qvec
 from ..pixlib.utils.experiments import load_experiment
 from ..pixlib.models import get_model
@@ -106,6 +106,8 @@ class RetrievalLocalizer(Localizer):
 
         if paths.global_descriptors is not None:
             global_descriptors = load_hdf5(paths.global_descriptors)
+        elif paths.hloc_global_descriptors is not None:
+            global_descriptors = load_hloc_netvlad_hdf5(paths.hloc_global_descriptors)
         else:
             global_descriptors = None
 

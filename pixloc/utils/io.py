@@ -67,6 +67,14 @@ def load_hdf5(path: Path) -> Dict[str, Any]:
     return data
 
 
+def load_hloc_netvlad_hdf5(path: Path) -> Dict[str, Any]:
+    with h5py.File(path, 'r', libver='latest') as hfile:
+        data = {}
+        for key in hfile.keys():
+            data[key] = hfile[key]['global_descriptor'].__array__()
+    return data
+
+
 def write_pose_results(pose_dict: Dict, outfile: Path,
                        prepend_camera_name: bool = False):
     logger.info('Writing the localization results to %s.', outfile)

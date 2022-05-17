@@ -20,6 +20,7 @@ class Paths:
     retrieval_pairs: Optional[Path] = None
     results: Optional[Path] = None
     global_descriptors: Optional[Path] = None
+    hloc_global_descriptors: Optional[Path] = None
     hloc_logs: Optional[Path] = None
     ground_truth: Optional[Path] = None
 
@@ -71,6 +72,7 @@ def create_argparser(dataset: str) -> argparse.ArgumentParser:
     parser.add_argument('--reference_sfm', type=Path)
     parser.add_argument('--retrieval', type=Path)
     parser.add_argument('--global_descriptors', type=Path)
+    parser.add_argument('--hloc_global_descriptors', type=Path)
     parser.add_argument('--hloc_logs', type=Path)
 
     parser.add_argument('--dataset', type=Path,

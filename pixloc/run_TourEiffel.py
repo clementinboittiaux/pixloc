@@ -11,6 +11,7 @@ default_paths = Paths(
     reference_images='{suffix}/images',
     reference_sfm='{suffix}/sfm_superpoint+superglue/',
     query_list='{suffix}/query_list_with_intrinsics.txt',
+    hloc_global_descriptors='{suffix}/global-feats-netvlad.h5',
     retrieval_pairs='{suffix}/pairs-query-netvlad10.txt',
     ground_truth='{suffix}/',
     results='pixloc_TourEiffel_{suffix}{from_poses}.txt',
