@@ -24,25 +24,24 @@ default_confs = {
         'experiment': experiment,
         'features': {},
         'optimizer': {
-            'num_iters': 100,
-            'pad': 2,  # to 1?
+            'num_iters': 150,
+            'pad': 1,
         },
         'refinement': {
-            'num_dbs': 5,
+            'num_dbs': 3,
             'multiscale': [4, 1],
             'point_selection': 'all',
             'normalize_descriptors': True,
-            'average_observations': True,
-            'filter_covisibility': False,
-            'do_pose_approximation': False,
+            'average_observations': False,
+            'do_pose_approximation': True,
         },
     },
     'from_poses': {
         'experiment': experiment,
-        'features': {},
+        'features': {'preprocessing': {'resize': 1600}},
         'optimizer': {
-            'num_iters': 100,
-            'pad': 2,
+            'num_iters': 50,
+            'pad': 1,
         },
         'refinement': {
             'num_dbs': 5,
